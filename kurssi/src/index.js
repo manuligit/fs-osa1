@@ -10,9 +10,13 @@ const Otsikko = (props) => {
 const Sisalto = (props) => {
     return (
         <div>
-            <Osa osa={props.osat[0].nimi}  tehtavia={props.osat[0].tehtavia}/>
-            <Osa osa={props.osat[1].nimi}  tehtavia={props.osat[1].tehtavia}/>
-            <Osa osa={props.osat[2].nimi}  tehtavia={props.osat[2].tehtavia}/>
+            {props.osat.map((item, i) => {
+                return <Osa key={i} osa={item.nimi}  tehtavia={item.tehtavia}/>
+            })}
+
+            {/* <Osa osa={props.osat[0].nimi}  tehtavia={props.osat[0].tehtavia}/> */}
+            {/* <Osa osa={props.osat[1].nimi}  tehtavia={props.osat[1].tehtavia}/> */}
+            {/* <Osa osa={props.osat[2].nimi}  tehtavia={props.osat[2].tehtavia}/> */}
         </div>
     )
 }
