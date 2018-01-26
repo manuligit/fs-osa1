@@ -4,7 +4,22 @@ import './index.css';
 
 const Button = ({ handleClick, text }) => <button onClick={handleClick}>{text}</button>
 
-const Display = ({name, counter}) => <p>{name}: {counter} </p>
+const Statistics = ({positive, negative, neutral, average, percent}) => {
+    // Add % to the percentage
+    const asPercent = x => (x)+"%"
+
+    return (
+        <div>
+            <Statistic name={"Hyvä"} counter={positive}/>
+            <Statistic name={"Neutraali"} counter={neutral}/>
+            <Statistic name={"Huono"} counter={negative}/>
+            <Statistic name={"Keskiarvo"} counter={average}/>
+            <Statistic name={"Positiivisia"} counter={asPercent(percent)}/>
+        </div>
+    )
+}
+
+const Statistic = ({name, counter}) => <p>{name}: {counter} </p>
 
 class App extends React.Component {
     constructor(props) {
@@ -42,7 +57,7 @@ class App extends React.Component {
         
         // Catch NaN and round the numbers
         average = (average || 0).toFixed(2)
-        percent = (percent || 0).toFixed(2)
+        percent = (percent*100 || 0).toFixed(2)
 
         return (
             <div>
@@ -50,11 +65,7 @@ class App extends React.Component {
                 <Button handleClick={this.addToPositive} text="Hyvä"/>
                 <Button handleClick={this.addToNeutral} text="Neutraali"/>
                 <Button handleClick={this.addToNegative} text="Huono"/>
-                <Display name={"Hyvä"} counter={this.state.positive}/>
-                <Display name={"Neutraali"} counter={this.state.neutral}/>
-                <Display name={"Huono"} counter={this.state.negative}/>
-                <Display name={"Keskiarvo"} counter={average}/>
-                <Display name={"Positiivisia"} counter={percent}/>
+                <Statistics positive={this.state.positive} negative={this.state.negative} neutral={this.state.neutral} average={average} percent={percent}/>
             </div>
         )
     }
