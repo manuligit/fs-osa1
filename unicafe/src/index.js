@@ -10,16 +10,21 @@ const Statistics = ({positive, negative, neutral, average, percent}) => {
 
     return (
         <div>
-            <Statistic name={"Hyvä"} counter={positive}/>
-            <Statistic name={"Neutraali"} counter={neutral}/>
-            <Statistic name={"Huono"} counter={negative}/>
-            <Statistic name={"Keskiarvo"} counter={average}/>
-            <Statistic name={"Positiivisia"} counter={asPercent(percent)}/>
+            <h1>Statistiikka</h1>
+            <table>
+                <tbody>
+                    <Statistic name={"Hyvä"} counter={positive}/>
+                    <Statistic name={"Neutraali"} counter={neutral}/>
+                    <Statistic name={"Huono"} counter={negative}/>
+                    <Statistic name={"Keskiarvo"} counter={average}/>
+                    <Statistic name={"Positiivisia"} counter={asPercent(percent)}/>
+                </tbody>
+            </table>
         </div>
     )
 }
 
-const Statistic = ({name, counter}) => <p>{name}: {counter} </p>
+const Statistic = ({name, counter}) => <tr><td>{name}</td><td>{counter}</td></tr>
 
 class App extends React.Component {
     constructor(props) {
