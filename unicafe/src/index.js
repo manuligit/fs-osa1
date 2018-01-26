@@ -31,22 +31,8 @@ class App extends React.Component {
         }
     }
 
-    addToPositive = () => {
-        this.setState({ 
-            positive: this.state.positive + 1,
-        })
-    }
-
-    addToNegative= () => {
-        this.setState({ 
-            negative: this.state.negative + 1
-        })
-    }
-
-    addToNeutral= () => {
-        this.setState({ 
-            neutral: this.state.neutral + 1
-        })
+    incrementStats = (value) => () => {
+        this.setState({ [value]: this.state[value] + 1 })
     }
 
     render() {
@@ -64,9 +50,9 @@ class App extends React.Component {
             return (
                 <div>
                     <h1>Anna palautetta</h1>
-                    <Button handleClick={this.addToPositive} text="Hyvä"/>
-                    <Button handleClick={this.addToNeutral} text="Neutraali"/>
-                    <Button handleClick={this.addToNegative} text="Huono"/>
+                    <Button handleClick={this.incrementStats("positive")} text="Hyvä"/>
+                    <Button handleClick={this.incrementStats("neutral")} text="Neutraali"/>
+                    <Button handleClick={this.incrementStats("negative")} text="Huono"/>
                     <p>Ei yhtään palautetta annettu</p>     
                 </div>
             )
@@ -75,9 +61,9 @@ class App extends React.Component {
         return (
             <div>
                 <h1>Anna palautetta</h1>
-                <Button handleClick={this.addToPositive} text="Hyvä"/>
-                <Button handleClick={this.addToNeutral} text="Neutraali"/>
-                <Button handleClick={this.addToNegative} text="Huono"/>
+                <Button handleClick={this.incrementStats("positive")} text="Hyvä"/>
+                <Button handleClick={this.incrementStats("neutral")} text="Neutraali"/>
+                <Button handleClick={this.incrementStats("negative")} text="Huono"/>
                 <Statistics positive={this.state.positive} negative={this.state.negative} neutral={this.state.neutral} average={average} percent={percent}/>
             </div>
         )
