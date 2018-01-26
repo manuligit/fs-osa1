@@ -22,13 +22,35 @@ class App extends React.Component {
     this.setState({ pisteet: kopio })
   }
 
+  getMostVoted = () => {
+    var index = 0
+    var comparator = this.state.pisteet[0]
+    console.log(this.state.pisteet.length)
+    for (let i = 1; i < this.state.pisteet.length-1; i++) {
+      if (this.state.pisteet[i] > comparator) {
+        comparator=this.state.pisteet[i]
+        index = i
+      }
+    }
+    return [this.props.anecdotes[index], this.state.pisteet[index]]
+
+  }
+
   render() {
+    // Calculate most voted from the list
+    var mostvotes = this.getMostVoted()
+    var voted = mostvotes[0]
+    var votes = mostvotes[1]
     return (
       <div>
          <p>{this.props.anecdotes[this.state.selected]}</p>
          <p> has {this.state.pisteet[this.state.selected]} votes </p>
          <Button handleClick={this.vote} text="Vote"/>
          <Button handleClick={this.getRandom} text="New anecdote"/>
+
+         <h2>Anecdote with most votes:</h2>
+         <p>{voted}</p>
+         <p> has {votes} votes </p>
       </div>
     )
   }
