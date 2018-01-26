@@ -18,7 +18,7 @@ class App extends React.Component {
 
     addToPositive = () => {
         this.setState({ 
-            positive: this.state.positive + 1
+            positive: this.state.positive + 1,
         })
     }
 
@@ -36,6 +36,14 @@ class App extends React.Component {
 
     render() {
         console.log(this.state)
+        // Calculate average and percent every time the state changes
+        var average = ((this.state.positive - this.state.negative ) / (this.state.positive + this.state.negative + this.state.neutral))
+        var percent = (this.state.positive / (this.state.positive + this.state.negative + this.state.neutral))
+        
+        // Catch NaN and round the numbers
+        average = (average || 0).toFixed(2)
+        percent = (percent || 0).toFixed(2)
+
         return (
             <div>
                 <h1>Anna palautetta</h1>
@@ -45,6 +53,8 @@ class App extends React.Component {
                 <Display name={"Hyvä"} counter={this.state.positive}/>
                 <Display name={"Neutraali"} counter={this.state.neutral}/>
                 <Display name={"Huono"} counter={this.state.negative}/>
+                <Display name={"Keskiarvo"} counter={average}/>
+                <Display name={"Positiivisia"} counter={percent}/>
             </div>
         )
     }
