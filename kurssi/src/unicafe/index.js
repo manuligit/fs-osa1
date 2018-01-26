@@ -4,31 +4,31 @@ import './index.css';
 
 const Button = ({ handleClick, text }) => <button onClick={handleClick}>{text}</button>
 
-const Statistics = ({positive, negative, neutral, average, percent}) => {
+const Statistics = ({ positive, negative, neutral, average, percent }) => {
     // Add % to the percentage
-    const asPercent = x => (x)+"%"
+    const asPercent = x => (x) + "%"
 
     return (
         <div>
             <h1>Statistiikka</h1>
             <table>
                 <tbody>
-                    <Statistic name={"Hyvä"} counter={positive}/>
-                    <Statistic name={"Neutraali"} counter={neutral}/>
-                    <Statistic name={"Huono"} counter={negative}/>
-                    <Statistic name={"Keskiarvo"} counter={average}/>
-                    <Statistic name={"Positiivisia"} counter={asPercent(percent)}/>
+                    <Statistic name={"Hyvä"} counter={positive} />
+                    <Statistic name={"Neutraali"} counter={neutral} />
+                    <Statistic name={"Huono"} counter={negative} />
+                    <Statistic name={"Keskiarvo"} counter={average} />
+                    <Statistic name={"Positiivisia"} counter={asPercent(percent)} />
                 </tbody>
             </table>
         </div>
     )
 }
 
-const Statistic = ({name, counter}) => <tr><td>{name}</td><td>{counter}</td></tr>
+const Statistic = ({ name, counter }) => <tr><td>{name}</td><td>{counter}</td></tr>
 
 class App extends React.Component {
     constructor(props) {
-        super(props) 
+        super(props)
         this.state = {
             positive: 0,
             negative: 0,
@@ -43,22 +43,22 @@ class App extends React.Component {
     render() {
         console.log(this.state)
         // Calculate average and percent every time the state changes
-        var average = ((this.state.positive - this.state.negative ) / (this.state.positive + this.state.negative + this.state.neutral))
+        var average = ((this.state.positive - this.state.negative) / (this.state.positive + this.state.negative + this.state.neutral))
         var percent = (this.state.positive / (this.state.positive + this.state.negative + this.state.neutral))
-        
+
         // Catch NaN and round the numbers
         average = (average || 0).toFixed(2)
-        percent = (percent*100 || 0).toFixed(2)
+        percent = (percent * 100 || 0).toFixed(2)
 
         // Render statistics only if there are any
         if (this.state.positive === 0 && this.state.negative === 0 && this.state.neutral === 0) {
             return (
                 <div>
                     <h1>Anna palautetta</h1>
-                    <Button handleClick={this.incrementStats("positive")} text="Hyvä"/>
-                    <Button handleClick={this.incrementStats("neutral")} text="Neutraali"/>
-                    <Button handleClick={this.incrementStats("negative")} text="Huono"/>
-                    <p>Ei yhtään palautetta annettu</p>     
+                    <Button handleClick={this.incrementStats("positive")} text="Hyvä" />
+                    <Button handleClick={this.incrementStats("neutral")} text="Neutraali" />
+                    <Button handleClick={this.incrementStats("negative")} text="Huono" />
+                    <p>Ei yhtään palautetta annettu</p>
                 </div>
             )
         }
@@ -66,10 +66,10 @@ class App extends React.Component {
         return (
             <div>
                 <h1>Anna palautetta</h1>
-                <Button handleClick={this.incrementStats("positive")} text="Hyvä"/>
-                <Button handleClick={this.incrementStats("neutral")} text="Neutraali"/>
-                <Button handleClick={this.incrementStats("negative")} text="Huono"/>
-                <Statistics positive={this.state.positive} negative={this.state.negative} neutral={this.state.neutral} average={average} percent={percent}/>
+                <Button handleClick={this.incrementStats("positive")} text="Hyvä" />
+                <Button handleClick={this.incrementStats("neutral")} text="Neutraali" />
+                <Button handleClick={this.incrementStats("negative")} text="Huono" />
+                <Statistics positive={this.state.positive} negative={this.state.negative} neutral={this.state.neutral} average={average} percent={percent} />
             </div>
         )
     }
