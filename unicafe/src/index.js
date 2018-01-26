@@ -59,6 +59,19 @@ class App extends React.Component {
         average = (average || 0).toFixed(2)
         percent = (percent*100 || 0).toFixed(2)
 
+        // Render statistics only if there are any
+        if (this.state.positive === 0 && this.state.negative === 0 && this.state.neutral === 0) {
+            return (
+                <div>
+                    <h1>Anna palautetta</h1>
+                    <Button handleClick={this.addToPositive} text="Hyvä"/>
+                    <Button handleClick={this.addToNeutral} text="Neutraali"/>
+                    <Button handleClick={this.addToNegative} text="Huono"/>
+                    <p>Ei yhtään palautetta annettu</p>     
+                </div>
+            )
+        }
+
         return (
             <div>
                 <h1>Anna palautetta</h1>
