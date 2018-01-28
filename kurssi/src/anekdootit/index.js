@@ -12,7 +12,6 @@ class App extends React.Component {
 
   getRandom = () => {
     var item = Math.floor(Math.random() * anecdotes.length)
-    //console.log(item)
     this.setState({ selected: item })
   }
 
@@ -33,12 +32,21 @@ class App extends React.Component {
       }
     }
     return [this.props.anecdotes[index], this.state.pisteet[index]]
-
   }
+
+  getMostVotedF= () => {
+    const reducer = (first, second) => (first > second) ? first : second
+    var result = this.state.pisteet.reduce(reducer)
+    // Get index of result
+    var index = this.state.pisteet.findIndex((element) => (element===result))
+
+    return [this.props.anecdotes[index], this.state.pisteet[index]]
+  }
+
 
   render() {
     // Calculate most voted from the list
-    var mostvotes = this.getMostVoted()
+    var mostvotes = this.getMostVotedF()
     var voted = mostvotes[0]
     var votes = mostvotes[1]
     return (
